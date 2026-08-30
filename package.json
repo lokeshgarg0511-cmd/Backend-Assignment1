@@ -1,0 +1,20 @@
+{
+  "name": "smart-utility-toolkit",
+  "version": "1.0.0",
+  "description": "",
+  "main": "App.js",
+  "scripts": {
+    "start": "node App.js",
+    "calculator": "node Calculator.js",
+    "file": "node \"File Manager.js\"",
+    "dice": "node Dice.js"
+    
+  },
+  "keywords": [
+    "nodejs",
+    "backend",
+    "lab-assignment"
+  ],
+  "author": "",
+  "license": "ISC"
+}
