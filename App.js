@@ -1,5 +1,3 @@
-// App.js
-
 const isEven = require("./Modules/isEven");
 const Logger = require("./Modules/Logger");
 

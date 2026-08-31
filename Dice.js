@@ -1,5 +1,3 @@
-// Dice.js
-
 const crypto = require("crypto");
 
 function rollDice() {

@@ -1,5 +1,3 @@
-// File Manager.js
-
 const fs = require("fs");
 
 const fileName = "sample.txt";
