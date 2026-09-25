@@ -1,0 +1,269 @@
+//1. modules/iseven.js
+
+function isEven(number) {
+    return number % 2 === 0;
+}
+
+module.exports = isEven;
+
+1. modules/logger.js
+
+function log(message) {
+    console.log("[LOG]:", message);
+}
+
+function error(message) {
+    console.log("[ERROR]:", message);
+}
+
+module.exports = {
+    log,
+    error
+};
+
+//2. app.js
+
+const isEven = require("./Modules/isEven");
+const Logger = require("./Modules/Logger");
+
+const Service = require("./Service");
+const Text = require("./Text");
+
+Logger.log("Smart Utility Toolkit Started");
+
+console.log("10 is even:", isEven(10));
+console.log("5 is even:", isEven(5));
+
+console.log("Addition:", Service.add(10, 5));
+console.log("Subtraction:", Service.subtract(10, 5));
+console.log("Multiplication:", Service.multiply(10, 5));
+console.log("Division:", Service.divide(10, 5));
+
+console.log("Uppercase:", Text.upperCase("hello world"));
+console.log("Lowercase:", Text.lowerCase("HELLO WORLD"));
+console.log("Characters:", Text.countCharacters("Hello"));
+
+Logger.log("Smart Utility Toolkit Completed");
+
+//3. calculator.js
+
+const operation = process.argv[2];
+const num1 = Number(process.argv[3]);
+const num2 = Number(process.argv[4]);
+
+if (operation === "add") {
+    console.log("Result:", num1 + num2);
+}
+else if (operation === "subtract") {
+    console.log("Result:", num1 - num2);
+}
+else if (operation === "multiply") {
+    console.log("Result:", num1 * num2);
+}
+else if (operation === "divide") {
+
+    if (num2 === 0) {
+        console.log("Cannot divide by zero");
+    }
+    else {
+        console.log("Result:", num1 / num2);
+    }
+
+}
+else {
+    console.log("Invalid operation");
+    console.log("Use: add, subtract, multiply, divide");
+}
+
+//4. dice.js
+
+const crypto = require("crypto");
+
+function rollDice() {
+
+    const number = crypto.randomInt(1, 7);
+
+    return number;
+}
+
+console.log("Dice Rolled:", rollDice());
+
+//5. file manager.js
+
+const fs = require("fs");
+
+const fileName = "sample.txt";
+
+// CREATE FILE
+fs.writeFile(fileName, "Hello, this is my file.", (err) => {
+
+    if (err) {
+        console.log("Error creating file");
+        return;
+    }
+
+    console.log("File created successfully");
+
+    // READ FILE
+    fs.readFile(fileName, "utf8", (err, data) => {
+
+        if (err) {
+            console.log("Error reading file");
+            return;
+        }
+
+        console.log("File content:", data);
+
+        // UPDATE FILE
+        fs.appendFile(fileName, "\nThis is updated content.", (err) => {
+
+            if (err) {
+                console.log("Error updating file");
+                return;
+            }
+
+            console.log("File updated successfully");
+
+            // READ UPDATED FILE
+            fs.readFile(fileName, "utf8", (err, data) => {
+
+                if (err) {
+                    console.log("Error reading updated file");
+                    return;
+                }
+
+                console.log("Updated content:", data);
+
+                // DELETE FILE
+                fs.unlink(fileName, (err) => {
+
+                    if (err) {
+                        console.log("Error deleting file");
+                        return;
+                    }
+
+                    console.log("File deleted successfully");
+                });
+            });
+        });
+    });
+});
+
+//6. package-lock.json
+
+{
+  "name": "smart-utility-toolkit",
+  "version": "1.0.0",
+  "lockfileVersion": 3,
+  "requires": true,
+  "packages": {
+    "": {
+      "name": "smart-utility-toolkit",
+      "version": "1.0.0",
+      "license": "ISC"
+    }
+  }
+}
+
+//7. package.json
+
+{
+  "name": "smart-utility-toolkit",
+  "version": "1.0.0",
+  "description": "",
+  "main": "App.js",
+  "scripts": {
+    "start": "node App.js",
+    "calculator": "node Calculator.js",
+    "file": "node \"File Manager.js\"",
+    "dice": "node Dice.js"
+    
+  },
+  "keywords": [
+    "nodejs",
+    "backend",
+    "lab-assignment"
+  ],
+  "author": "",
+  "license": "ISC"
+}
+
+//8. server.js
+
+const http = require('http');
+
+const PORT = 3000;
+
+const server = http.createServer((req, res) => {
+    console.log(`Incoming request: ${req.method} ${req.url}`);
+
+    res.setHeader('Content-Type', 'text/plain');
+
+    if (req.url === '/') {
+        res.statusCode = 200;
+        res.end('Welcome to Node Server');
+    } else if (req.url === '/about') {
+        res.statusCode = 200;
+        res.end('About Page');
+    } else if (req.url === '/contact') {
+        res.statusCode = 200;
+        res.end('Contact Page');
+    } else {
+        res.statusCode = 404;
+        res.end('404 Error: Page Not Found');
+    }
+});
+
+server.listen(PORT, () => {
+    console.log(`Server is running at http://localhost:${PORT}/`);
+});
+
+//9. services.js
+
+function add(a, b) {
+    return a + b;
+}
+
+function subtract(a, b) {
+    return a - b;
+}
+
+function multiply(a, b) {
+    return a * b;
+}
+
+function divide(a, b) {
+
+    if (b === 0) {
+        return "Cannot divide by zero";
+    }
+
+    return a / b;
+}
+
+module.exports = {
+    add,
+    subtract,
+    multiply,
+    divide
+};
+
+//10. text.js
+
+function upperCase(text) {
+    return text.toUpperCase();
+}
+
+function lowerCase(text) {
+    return text.toLowerCase();
+}
+
+function countCharacters(text) {
+    return text.length;
+}
+
+module.exports = {
+    upperCase,
+    lowerCase,
+    countCharacters
+};
